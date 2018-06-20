@@ -43,12 +43,25 @@ describe('Park', function() {
     park.addDinosaur(dinosaur1);
     park.addDinosaur(dinosaur2);
     park.addDinosaur(dinosaur3);
-    actualValue = park.mostPopularDinosaur().name;
+    actualValue = park.mostPopularDinosaur().species;
     assert.strictEqual(actualValue, 'Velociraptor');
   });
 
-  it('should be able to find all dinosaurs of a particular species');
+  it('should be able to find all dinosaurs of a particular species', function () {
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    actualValue = park.findDinosaurSpecies('Velociraptor');
+    assert.deepEqual(actualValue, [dinosaur2]);
+  });
 
-  it('should be able to remove all dinosaurs of a particular species');
+  it('should be able to remove all dinosaurs of a particular species', function () {
+    park.addDinosaur(dinosaur1);
+    park.addDinosaur(dinosaur2);
+    park.addDinosaur(dinosaur3);
+    park.removeDinosaursSpecies('t-rex');
+    actualValue = park.dinosaurs.length;
+    assert.strictEqual(actualValue, 2);
+  });
 
 });

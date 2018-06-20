@@ -12,17 +12,38 @@ Park.prototype.removeDinosaur = function(dinosaur) {
   this.dinosaurs.splice();
 }
 
-Park.prototype.mostPopularDinosaur = function {
-  function compare(dinosaur1, dinosaur2) {
-    if (dinosaur1.guestsAttractedPerDay < dinosaur.guestsAttractedPerDay)
+Park.prototype.mostPopularDinosaur = function () {
+  compare = function (dinosaur1, dinosaur2) {
+    if (dinosaur1.guestsAttractedPerDay > dinosaur2.guestsAttractedPerDay)
       return -1;
-    if (dinosaur1.guestsAttractedPerDay > dinosaur.guestsAttractedPerDay)
+    if (dinosaur1.guestsAttractedPerDay < dinosaur2.guestsAttractedPerDay)
       return 1;
-    return 0;
+      return 0;
   }
-  dinosaurs.sort(compare);
 
+  const sortedDinosaurs = this.dinosaurs.sort(compare);
+  return sortedDinosaurs[0];
+
+}
+
+Park.prototype.findDinosaurSpecies = function (dinosaurSpecies) {
+  const foundDinosaurs = [];
+  for (dinosaur of this.dinosaurs) {
+    if (dinosaur.species === dinosaurSpecies) {
+      foundDinosaurs.push(dinosaur);
+    }
   }
+  return foundDinosaurs;
+}
+
+Park.prototype.removeDinosaursSpecies = function (dinosaurSpecies) {
+  for (dinosaur of this.dinosaurs) {
+    if (dinosaur.species === dinosaurSpecies) {
+      let a = this.dinosaurs.indexOf(dinosaur);
+      this.dinosaurs.splice(a, 1);
+    }
+  }
+  return this.dinosaurs;
 }
 
 module.exports = Park;
